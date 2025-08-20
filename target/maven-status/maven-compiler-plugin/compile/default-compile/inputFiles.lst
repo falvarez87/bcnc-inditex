@@ -1,0 +1,10 @@
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/PricingApplication.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/domain/port/PriceRepositoryPort.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/infraestructure/config/BeanConfig.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/domain/model/Price.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/application/PriceService.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/infraestructure/config/DataInitializer.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/infraestructure/adapter/rest/PriceController.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/infraestructure/adapter/repository/PriceEntity.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/infraestructure/adapter/repository/SpringDataPriceRepository.java
+/Users/falvarez/Documents/repository/Inditex/priceapp/src/main/java/com/inditex/priceapp/infraestructure/adapter/repository/JpaPriceRepository.java

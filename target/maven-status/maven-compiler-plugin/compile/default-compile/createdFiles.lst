@@ -1,0 +1,10 @@
+com/inditex/priceapp/infraestructure/adapter/repository/PriceEntity.class
+com/inditex/priceapp/domain/model/Price.class
+com/inditex/priceapp/infraestructure/config/BeanConfig.class
+com/inditex/priceapp/infraestructure/adapter/repository/SpringDataPriceRepository.class
+com/inditex/priceapp/infraestructure/adapter/rest/PriceController.class
+com/inditex/priceapp/domain/port/PriceRepositoryPort.class
+com/inditex/priceapp/infraestructure/config/DataInitializer.class
+com/inditex/priceapp/infraestructure/adapter/repository/JpaPriceRepository.class
+com/inditex/priceapp/PricingApplication.class
+com/inditex/priceapp/application/PriceService.class
