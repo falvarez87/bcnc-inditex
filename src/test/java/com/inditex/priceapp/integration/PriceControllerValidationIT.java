@@ -34,13 +34,3 @@ class PriceControllerValidationIT {
                 .andExpect(status().isOk());
     }
 }
-
-//.param("date", "2020-06-14T10:00:00")
-
-/* mockMvc.perform(get("/prices")
-                        .param("date", "2020-06-14T10:00:00")
-                        .param("productId", "35455")
-                        .param("brandId", "1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.priceList").value(1))
-                .andExpect(jsonPath("$.price").value(35.50));*/

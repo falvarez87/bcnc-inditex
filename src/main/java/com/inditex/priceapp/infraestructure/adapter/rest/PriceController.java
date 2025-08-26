@@ -27,8 +27,8 @@ public class PriceController {
     // Nuevo path RESTful
     @GetMapping("/brands/{brandId}/products/{productId}/price")
     public ResponseEntity<?> getPriceRestful(
-            @PathVariable Long brandId,
-            @PathVariable Long productId,
+            @PathVariable("brandId") Long brandId,
+            @PathVariable("productId") Long productId,
             @RequestParam(name = "date")
             @NotNull @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         return mapToResponse(service.getApplicablePrice(brandId, productId, date));
