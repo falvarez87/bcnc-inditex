@@ -5,12 +5,19 @@ spring:
     username: sa
     password: password
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
-    defer-datasource-initialization: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
   sql:
     init:
       mode: always
+      platform: h2
+      continue-on-error: false
+      data-locations: classpath:data.sql
   h2:
     console:
       enabled: true

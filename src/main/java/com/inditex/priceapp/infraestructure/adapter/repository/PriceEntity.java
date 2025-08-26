@@ -6,7 +6,12 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "prices")
+@Table(
+        name = "prices",
+        indexes = {
+                @Index(name = "idx_prices_brand_product_dates", columnList = "brand_id, product_id, start_date, end_date")
+        }
+)
 public class PriceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +41,7 @@ public class PriceEntity {
     @Column(name = "currency", nullable = false, length = 3)
     private String currency;
 
+    // getters/setters...
     public Long getId() { return id; }
     public Long getBrandId() { return brandId; }
     public void setBrandId(Long brandId) { this.brandId = brandId; }

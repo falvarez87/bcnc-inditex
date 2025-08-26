@@ -83,7 +83,7 @@ Se han implementado dos tipos de pruebas:
 
 Se pueden ejecutar con:
 ```bash
-mvn test
+mvn test -Dspring.profiles.active=test
 ```
 
 ---

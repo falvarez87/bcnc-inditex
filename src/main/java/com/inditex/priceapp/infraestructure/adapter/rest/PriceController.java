@@ -5,17 +5,17 @@ import com.inditex.priceapp.domain.model.Price;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@Validated
 @RestController
-@RequestMapping("/prices")
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class PriceController {
 
     private final PriceService service;
@@ -24,13 +24,26 @@ public class PriceController {
         this.service = service;
     }
 
-    @GetMapping
-    public ResponseEntity<?> getPrice(
+    // Nuevo path RESTful
+    @GetMapping("/brands/{brandId}/products/{productId}/price")
+    public ResponseEntity<?> getPriceRestful(
+            @PathVariable Long brandId,
+            @PathVariable Long productId,
+            @RequestParam(name = "date")
+            @NotNull @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+        return mapToResponse(service.getApplicablePrice(brandId, productId, date));
+    }
+
+    // Mantener compatibilidad con el endpoint anterior (para tus tests actuales)
+    @GetMapping("/prices")
+    public ResponseEntity<?> getPriceLegacy(
             @RequestParam(name = "date") @NotNull @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
             @RequestParam(name = "productId") @NotNull Long productId,
             @RequestParam(name = "brandId") @NotNull Long brandId) {
+        return mapToResponse(service.getApplicablePrice(brandId, productId, date));
+    }
 
-        Optional<Price> price = service.getApplicablePrice(brandId, productId, date);
+    private ResponseEntity<?> mapToResponse(Optional<Price> price) {
         return price.<ResponseEntity<?>>map(p -> ResponseEntity.ok(
                         new PriceResponse(
                                 p.getProductId(),
@@ -42,6 +55,6 @@ public class PriceController {
                                 p.getCurrency()
                         )
                 ))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("No price found"));
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
