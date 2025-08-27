@@ -5,10 +5,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.inditex.infrastructure.persistence",
-        entityManagerFactoryRef = "entityManagerFactory",
-        transactionManagerRef = "transactionManager"
-)
+    basePackages = "com.inditex.infrastructure.persistence",
+    entityManagerFactoryRef = "entityManagerFactory",
+    transactionManagerRef = "transactionManager")
 public class JpaConfig {
-    // Configuración adicional si es necesaria
+  // Configuración adicional si es necesaria
 }

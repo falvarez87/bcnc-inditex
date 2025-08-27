@@ -25,7 +25,6 @@ El objetivo es exponer un endpoint que devuelva el precio aplicable de un produc
 
 ## 📌 Endpoint disponible
 
-//http://localhost:8080/api/v1/prices?date=2020-06-14T00:00:00&productId=35455&brandId=1
 `GET /api/v1/prices`
 
 **Parámetros de entrada (query params):**
@@ -35,7 +34,7 @@ El objetivo es exponer un endpoint que devuelva el precio aplicable de un produc
 
 **Ejemplo de llamada:**
 ```
-GET http://localhost:8080/prices?date=2020-06-14T10:00:00&productId=35455&brandId=1
+GET http://localhost:8080/api/v1/prices?date=2020-06-14T10:00:00&productId=35455&brandId=1
 ```
 
 **Respuesta de ejemplo (200 OK):**
@@ -99,6 +98,10 @@ Reporte HTML
 ```bash
 mvn checkstyle:checkstyle spotbugs:spotbugs
 # Reportes en: target/site/checkstyle.html y target/site/spotbugs.html
+```
+Se agrega plugin spotless para formatear y forzar estandar de estilos
+```bash
+mvn spotless:apply spotless:check
 ```
 
 ---
