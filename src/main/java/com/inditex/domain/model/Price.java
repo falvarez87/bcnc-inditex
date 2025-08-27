@@ -2,6 +2,7 @@ package com.inditex.domain.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,13 +33,15 @@ public class Price {
   private BigDecimal price;
   private String currency;
 
-  /** Determines if this price is applicable for the given date. */
-  public boolean isApplicable(LocalDateTime applicationDate) {
-    return !applicationDate.isBefore(startDate) && !applicationDate.isAfter(endDate);
-  }
-
-  /** Compares priorities between two price entries. */
-  public int comparePriority(Price other) {
-    return Integer.compare(this.priority, other.priority);
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Price price = (Price) o;
+    return Objects.equals(brandId, price.brandId)
+        && Objects.equals(productId, price.productId)
+        && Objects.equals(priceList, price.priceList)
+        && Objects.equals(startDate, price.startDate)
+        && Objects.equals(endDate, price.endDate);
   }
 }
