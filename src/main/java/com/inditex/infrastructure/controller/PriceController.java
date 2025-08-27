@@ -62,7 +62,8 @@ public class PriceController {
       summary = "Get applicable product price",
       description =
           "Retrieves the applicable price for a specific product, brand, and date combination. "
-              + "The system returns the price with the highest priority that is valid for the given datetime.",
+              + "The system returns the price with the highest priority that is valid "
+              + "for the given datetime.",
       parameters = {
         @Parameter(
             name = "date",

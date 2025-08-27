@@ -10,9 +10,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+/**
+ * Represents a Global Exception Handler for Controller.
+ *
+ * @author falvarez87
+ * @version 1.0
+ * @since 2025
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+  /** Handler response for PriceNotFoundException. */
   @ExceptionHandler(PriceNotFoundException.class)
   public ResponseEntity<Object> handlePriceNotFoundException(
       PriceNotFoundException ex, WebRequest request) {
@@ -24,6 +32,7 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
   }
 
+  /** Handler response for GlobalException. */
   @ExceptionHandler(Exception.class)
   public ResponseEntity<Object> handleGlobalException(Exception ex, WebRequest request) {
     Map<String, Object> body = new LinkedHashMap<>();

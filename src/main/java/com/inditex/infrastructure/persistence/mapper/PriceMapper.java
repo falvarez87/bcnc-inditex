@@ -4,9 +4,17 @@ import com.inditex.domain.model.Price;
 import com.inditex.infrastructure.persistence.entity.PriceEntity;
 import org.springframework.stereotype.Component;
 
+/**
+ * Represents a Mapper for Price (Entity <-> Domain).
+ *
+ * @author falvarez87
+ * @version 1.0
+ * @since 2025
+ */
 @Component
 public class PriceMapper {
 
+  /** Handler mapper Entity to Domain. */
   public Price toDomain(PriceEntity entity) {
     return new Price(
         entity.getId(),
@@ -20,6 +28,7 @@ public class PriceMapper {
         entity.getCurrency());
   }
 
+  /** Handler mapper Domain to Entity. */
   public PriceEntity toEntity(Price domain) {
     PriceEntity entity = new PriceEntity();
     entity.setId(domain.getId());

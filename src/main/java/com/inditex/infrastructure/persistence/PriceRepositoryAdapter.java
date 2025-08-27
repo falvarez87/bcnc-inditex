@@ -7,6 +7,13 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
+/**
+ * Represents the adapter for PriceRepository.
+ *
+ * @author falvarez87
+ * @version 1.0
+ * @since 2025
+ */
 @Component
 public class PriceRepositoryAdapter implements PriceRepository {
 

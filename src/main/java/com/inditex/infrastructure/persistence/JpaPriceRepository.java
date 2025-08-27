@@ -8,6 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Represents a JpaRepository for Price entity, with the used query for find applicable price.
+ *
+ * @author falvarez87
+ * @version 1.0
+ * @since 2025
+ */
 @Repository
 public interface JpaPriceRepository extends JpaRepository<PriceEntity, Long> {
 

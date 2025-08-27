@@ -10,14 +10,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Represents all the Swagger configuration.
+ *
+ * @author falvarez87
+ * @version 1.0
+ * @since 2025
+ */
 @Configuration
 public class SwaggerConfig {
 
   @Value("${server.port:8080}")
   private String serverPort;
 
+  /** OpenApi custom definition. */
   @Bean
-  public OpenAPI customOpenAPI() {
+  public OpenAPI customOpenApi() {
     return new OpenAPI()
         .info(
             new Info()

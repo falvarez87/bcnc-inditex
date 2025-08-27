@@ -1,10 +1,22 @@
 package com.inditex.infrastructure.persistence.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Represents a price entity for database. Contains all price-related information.
+ *
+ * @author falvarez87
+ * @version 1.0
+ * @since 2025
+ */
 @Entity
 @Table(name = "PRICES")
 public class PriceEntity {
@@ -40,7 +52,7 @@ public class PriceEntity {
   // Constructor por defecto
   public PriceEntity() {}
 
-  // Constructor completo
+  /** Complete constructor for PriceEntity. */
   public PriceEntity(
       Long brandId,
       LocalDateTime startDate,
@@ -135,8 +147,12 @@ public class PriceEntity {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     PriceEntity that = (PriceEntity) o;
     return Objects.equals(id, that.id);
   }
