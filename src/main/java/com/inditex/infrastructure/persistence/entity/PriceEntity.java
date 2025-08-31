@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * Represents a price entity for database. Contains all price-related information.
@@ -144,5 +143,4 @@ public class PriceEntity {
   public void setCurrency(String currency) {
     this.currency = currency;
   }
-
 }

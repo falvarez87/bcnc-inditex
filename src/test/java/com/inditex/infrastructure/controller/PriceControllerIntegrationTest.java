@@ -1,5 +1,6 @@
 package com.inditex.infrastructure.controller;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,19 +25,23 @@ class PriceControllerIntegrationTest {
 
   @MockBean private PriceService priceService;
 
+  private static final Long PRODUCT_ID = 35455L;
+  private static final Long BRAND_ID = 1L;
+  private static final String CURRENCY = "EUR";
+
   @Test
   void test1_10amDay14_ShouldReturnPriceList1() throws Exception {
     // Given
     LocalDateTime date = LocalDateTime.of(2020, 6, 14, 10, 0);
     PriceResponse response =
         new PriceResponse(
-            35455L,
-            1L,
+            PRODUCT_ID,
+            BRAND_ID,
             1,
             LocalDateTime.of(2020, 6, 14, 0, 0),
             LocalDateTime.of(2020, 12, 31, 23, 59, 59),
             new BigDecimal("35.50"),
-            "EUR");
+            CURRENCY);
 
     when(priceService.getApplicablePrice(any(), any(), any())).thenReturn(response);
 
@@ -45,15 +50,17 @@ class PriceControllerIntegrationTest {
         .perform(
             get("/api/v1/prices")
                 .param("date", "2020-06-14T10:00:00")
-                .param("productId", "35455")
-                .param("brandId", "1")
+                .param("productId", PRODUCT_ID.toString())
+                .param("brandId", BRAND_ID.toString())
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.productId").value(35455))
-        .andExpect(jsonPath("$.brandId").value(1))
+        .andExpect(jsonPath("$.productId").value(PRODUCT_ID))
+        .andExpect(jsonPath("$.brandId").value(BRAND_ID))
         .andExpect(jsonPath("$.priceList").value(1))
         .andExpect(jsonPath("$.price").value(35.50))
-        .andExpect(jsonPath("$.currency").value("EUR"));
+        .andExpect(jsonPath("$.currency").value(CURRENCY))
+        .andExpect(jsonPath("$.startDate").value("2020-06-14T00:00:00"))
+        .andExpect(jsonPath("$.endDate").value("2020-12-31T23:59:59"));
   }
 
   @Test
@@ -61,13 +68,13 @@ class PriceControllerIntegrationTest {
     // Given
     PriceResponse response =
         new PriceResponse(
-            35455L,
-            1L,
+            PRODUCT_ID,
+            BRAND_ID,
             2,
             LocalDateTime.of(2020, 6, 14, 15, 0),
             LocalDateTime.of(2020, 6, 14, 18, 30),
             new BigDecimal("25.45"),
-            "EUR");
+            CURRENCY);
 
     when(priceService.getApplicablePrice(any(), any(), any())).thenReturn(response);
 
@@ -76,8 +83,8 @@ class PriceControllerIntegrationTest {
         .perform(
             get("/api/v1/prices")
                 .param("date", "2020-06-14T16:00:00")
-                .param("productId", "35455")
-                .param("brandId", "1")
+                .param("productId", PRODUCT_ID.toString())
+                .param("brandId", BRAND_ID.toString())
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.priceList").value(2))
@@ -89,13 +96,13 @@ class PriceControllerIntegrationTest {
     // Given
     PriceResponse response =
         new PriceResponse(
-            35455L,
-            1L,
+            PRODUCT_ID,
+            BRAND_ID,
             1,
             LocalDateTime.of(2020, 6, 14, 0, 0),
             LocalDateTime.of(2020, 12, 31, 23, 59, 59),
             new BigDecimal("35.50"),
-            "EUR");
+            CURRENCY);
 
     when(priceService.getApplicablePrice(any(), any(), any())).thenReturn(response);
 
@@ -104,8 +111,8 @@ class PriceControllerIntegrationTest {
         .perform(
             get("/api/v1/prices")
                 .param("date", "2020-06-14T21:00:00")
-                .param("productId", "35455")
-                .param("brandId", "1")
+                .param("productId", PRODUCT_ID.toString())
+                .param("brandId", BRAND_ID.toString())
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.priceList").value(1))
@@ -117,13 +124,13 @@ class PriceControllerIntegrationTest {
     // Given
     PriceResponse response =
         new PriceResponse(
-            35455L,
-            1L,
+            PRODUCT_ID,
+            BRAND_ID,
             3,
             LocalDateTime.of(2020, 6, 15, 0, 0),
             LocalDateTime.of(2020, 6, 15, 11, 0),
             new BigDecimal("30.50"),
-            "EUR");
+            CURRENCY);
 
     when(priceService.getApplicablePrice(any(), any(), any())).thenReturn(response);
 
@@ -132,8 +139,8 @@ class PriceControllerIntegrationTest {
         .perform(
             get("/api/v1/prices")
                 .param("date", "2020-06-15T10:00:00")
-                .param("productId", "35455")
-                .param("brandId", "1")
+                .param("productId", PRODUCT_ID.toString())
+                .param("brandId", BRAND_ID.toString())
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.priceList").value(3))
@@ -145,13 +152,13 @@ class PriceControllerIntegrationTest {
     // Given
     PriceResponse response =
         new PriceResponse(
-            35455L,
-            1L,
+            PRODUCT_ID,
+            BRAND_ID,
             4,
             LocalDateTime.of(2020, 6, 15, 16, 0),
             LocalDateTime.of(2020, 12, 31, 23, 59, 59),
             new BigDecimal("38.95"),
-            "EUR");
+            CURRENCY);
 
     when(priceService.getApplicablePrice(any(), any(), any())).thenReturn(response);
 
@@ -160,8 +167,8 @@ class PriceControllerIntegrationTest {
         .perform(
             get("/api/v1/prices")
                 .param("date", "2020-06-16T21:00:00")
-                .param("productId", "35455")
-                .param("brandId", "1")
+                .param("productId", PRODUCT_ID.toString())
+                .param("brandId", BRAND_ID.toString())
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.priceList").value(4))
@@ -180,9 +187,40 @@ class PriceControllerIntegrationTest {
             get("/api/v1/prices")
                 .param("date", "2025-01-01T10:00:00")
                 .param("productId", "99999")
-                .param("brandId", "1")
+                .param("brandId", BRAND_ID.toString())
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isNotFound())
         .andExpect(jsonPath("$.message").exists());
+  }
+
+  @Test
+  void shouldReturn400WhenInvalidDate() throws Exception {
+    mockMvc
+        .perform(
+            get("/api/v1/prices")
+                .param("date", "invalid-date")
+                .param("productId", "35455")
+                .param("brandId", "1"))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.message").value(containsString("Invalid date format")));
+  }
+
+  @Test
+  void shouldReturn400WhenInvalidNumber() throws Exception {
+    mockMvc
+        .perform(
+            get("/api/v1/prices")
+                .param("date", "2020-06-14T10:00:00")
+                .param("productId", "not-a-number") // Número inválido
+                .param("brandId", "1"))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.message").value(containsString("Invalid number format")));
+  }
+
+  @Test
+  void shouldReturn400WhenMissingParameters() throws Exception {
+    mockMvc
+        .perform(get("/api/v1/prices").param("date", "2023-12-31T10:00:00"))
+        .andExpect(status().isBadRequest());
   }
 }

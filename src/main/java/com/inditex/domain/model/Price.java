@@ -35,8 +35,12 @@ public class Price {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Price price = (Price) o;
     return Objects.equals(brandId, price.brandId)
         && Objects.equals(productId, price.productId)
