@@ -16,6 +16,11 @@ public class PriceMapper {
 
   /** Handler mapper Entity to Domain. */
   public Price toDomain(PriceEntity entity) {
+
+    if (entity == null) {
+      return null;
+    }
+
     return new Price(
         entity.getId(),
         entity.getBrandId(),
@@ -30,6 +35,10 @@ public class PriceMapper {
 
   /** Handler mapper Domain to Entity. */
   public PriceEntity toEntity(Price domain) {
+    if (domain == null) {
+      return null;
+    }
+
     PriceEntity entity = new PriceEntity();
     entity.setId(domain.getId());
     entity.setBrandId(domain.getBrandId());
