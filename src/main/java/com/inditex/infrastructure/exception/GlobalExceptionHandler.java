@@ -64,11 +64,13 @@ public class GlobalExceptionHandler {
 
     String errorMessage;
 
-    if (ex.getRequiredType() != null && ex.getRequiredType().getName().contains("LocalDateTime")) {
+    Class<?> requiredType = ex.getRequiredType();
+
+    if (requiredType != null && requiredType.getName().contains("LocalDateTime")) {
       errorMessage =
           String.format(
               "Invalid date format '%s'. Expected format: yyyy-MM-ddTHH:mm:ss", ex.getValue());
-    } else if (ex.getRequiredType() == Long.class || ex.getRequiredType() == long.class) {
+    } else if (requiredType != null && (requiredType == Long.class || requiredType == long.class)) {
       errorMessage =
           String.format(
               "Invalid number format '%s' for parameter '%s'. Expected a valid number.",

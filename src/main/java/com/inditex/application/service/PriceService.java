@@ -3,8 +3,8 @@ package com.inditex.application.service;
 import com.inditex.application.dto.PriceResponse;
 import com.inditex.domain.exception.PriceNotFoundException;
 import com.inditex.domain.model.Price;
-import com.inditex.domain.repository.PriceRepository;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PriceService {
 
-  private final PriceRepository priceRepository;
+  private final PriceSearchService priceSearchService;
+  private final PriceMappingService priceMappingService;
 
   /**
    * Retrieves the applicable price for a product based on the specified criteria.
@@ -32,25 +33,19 @@ public class PriceService {
   @Transactional(readOnly = true)
   public PriceResponse getApplicablePrice(
       LocalDateTime applicationDate, Long productId, Long brandId) {
-    return priceRepository
-        .findApplicablePrice(applicationDate, productId, brandId)
-        .map(this::convertToResponse)
+    Optional<Price> price =
+        priceSearchService.findApplicablePrice(applicationDate, productId, brandId);
+
+    return price
+        .map(priceMappingService::toResponse)
         .orElseThrow(
             () ->
                 new PriceNotFoundException(
-                    String.format(
-                        "No price found for date: %s, productId: %d, brandId: %d",
-                        applicationDate, productId, brandId)));
-  }
-
-  private PriceResponse convertToResponse(Price price) {
-    return new PriceResponse(
-        price.getProductId(),
-        price.getBrandId(),
-        price.getPriceList(),
-        price.getStartDate(),
-        price.getEndDate(),
-        price.getPrice(),
-        price.getCurrency());
+                    "Price not found for brandId: "
+                        + brandId
+                        + ", productId: "
+                        + productId
+                        + ", date: "
+                        + applicationDate));
   }
 }

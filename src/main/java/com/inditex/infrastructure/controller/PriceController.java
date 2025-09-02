@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * product price information.
  */
 @RestController
-@RequestMapping("/api/v1/prices")
+@RequestMapping("/v1/prices")
 @Tag(name = "Prices", description = "API for price management and queries")
 @RequiredArgsConstructor
 public class PriceController {

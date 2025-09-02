@@ -14,7 +14,11 @@ El objetivo es exponer un endpoint que devuelva el precio aplicable de un produc
    ```
 3. Ejecutar con Maven:
    ```bash
-   mvn spring-boot:run
+   # Desarrollo (usa H2)
+   mvn spring-boot:run -Dspring-boot.run.profiles=dev
+   
+   # Producción (necesita PostgreSQL)
+   mvn spring-boot:run -Dspring-boot.run.profiles=prod
    ```
    La aplicación arranca en `http://localhost:8080`.
 4. Definición API (Swagger)
@@ -102,6 +106,17 @@ mvn checkstyle:checkstyle spotbugs:spotbugs
 Se agrega plugin spotless para formatear y forzar estandar de estilos
 ```bash
 mvn spotless:apply spotless:check
+```
+
+Ejecutar verificaciones de calidad
+```bash
+mvn checkstyle:checkstyle
+mvn spotbugs:check
+mvn pmd:check
+```
+Generar reporte de cobertura
+```bash
+mvn jacoco:report
 ```
 
 ---
